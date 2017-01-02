@@ -2,6 +2,7 @@
 require_relative 'common.rb'
 require_relative 'binary.rb'
 require_relative 'cross.rb'
+require_relative 'mutation.rb'
 require_relative 'configs.rb'
 
 # Load settings
@@ -57,8 +58,9 @@ for i in 1..generation_limit
   # cross
   block('-', "Selected crossed")
   population = Cross.cross(population, Configs.params)
-  #population.each {|n| puts n[0].to_s + ": " + n[1].to_s}
+
   # mutation
+  #population = Mutation.mutation(population, Configs.params)
   # new pop
 end
 
