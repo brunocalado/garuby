@@ -58,7 +58,7 @@ for i in 1..generation_limit
   population.each {|n| puts n[0].to_s + ": " + n[1].to_s} if debug
     
   # cross
-  block('-', "Selected crossed") if debug
+  block('-', "Cross") if debug
   population = Cross.cross(population, Configs.params)
 
   # mutation
@@ -70,7 +70,7 @@ for i in 1..generation_limit
   population.each {|n| n[1] = n[0].fitness }
 end
 
-# Saves solution
+# Saves solutions
 population.sort_by!{|x,y| y}.reverse!
 save_pop(population)
 

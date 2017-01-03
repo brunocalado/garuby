@@ -11,7 +11,7 @@ class Mutation
     puts 'Mutation: ' + mutation_rate.to_s
     for i in 0..population.length-1
       mutate = rand<=mutation_rate      
-      if true
+      if mutate
         mutate_position = rand(0..gene_length-1)
         puts "Antes (#{mutate_position}): \n" + population[i][0].to_s
         population[i][0].individual[mutate_position] = population[i][0].individual[mutate_position] == 0 ? 1 : 0
