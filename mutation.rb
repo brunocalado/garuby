@@ -9,11 +9,13 @@ class Mutation
     gene_length     = params[:gene_length].to_i 
 
     puts 'Mutation: ' + mutation_rate.to_s
-    for i in population
+    for i in 0..population.length-1
       mutate = rand<=mutation_rate      
       if true
-        puts mutate
-        puts i        
+        mutate_position = rand(0..gene_length-1)
+        puts "Antes (#{mutate_position}): \n" + population[i][0].to_s
+        population[i][0].individual[mutate_position] = population[i][0].individual[mutate_position] == 0 ? 1 : 0
+        puts "Depois (#{mutate_position}): \n" + population[i][0].to_s        
       end
 
     end

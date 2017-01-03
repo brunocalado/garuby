@@ -15,6 +15,7 @@ generation_limit  = Configs.params[:generation_limit].to_i
 cross_points      = Configs.params[:cross_points].to_i # max 1
 cross_selected    = Configs.params[:cross_selected].to_i
 mutation_rate     = Configs.params[:mutation_rate].to_f
+debug             = Configs.params[:debug] == 'true'
 population = []
 
 block
@@ -24,6 +25,7 @@ class Genotype < Binary; end
 Genotype.class_eval do
   # =======================================================
   # Define fitness
+  # Use @individual for an array with the gene
   def fitness
     out = 0
     @individual.each {|n| out+=n}
@@ -40,29 +42,36 @@ for i in 0..population_size-1
   population << [individual, individual.fitness]
   puts population[i][0].to_s + ": " + population[i][1].to_s # Shows inicial population
 end
+# fitness
+block('-', "Population score")
+population.each {|n| n[1] = n[0].fitness }
+
 
 # Run generations
 for i in 1..generation_limit
-  block('=', "Generation: [#{i}]")
+  block('=', "Generation: [#{i}]") if debug
   population.each {|n| puts n[0].to_s + ": " + n[1].to_s}
   
-  # fitness
-  block('-', "Population score")
-  population.each {|n| n[1] = n[0].fitness }
-
   # selection
-  block('-', "Population sorted")
+  block('-', "Population sorted") if debug
   population.sort_by!{|x,y| y}.reverse!
-  population.each {|n| puts n[0].to_s + ": " + n[1].to_s}
+  population.each {|n| puts n[0].to_s + ": " + n[1].to_s} if debug
     
   # cross
-  block('-', "Selected crossed")
+  block('-', "Selected crossed") if debug
   population = Cross.cross(population, Configs.params)
 
   # mutation
-  #population = Mutation.mutation(population, Configs.params)
-  # new pop
+  block('-', "Mutation") if debug
+  population = Mutation.mutation(population, Configs.params)
+
+  # fitness
+  block('-', "Population score") if debug
+  population.each {|n| n[1] = n[0].fitness }
 end
 
+# Saves solution
+population.sort_by!{|x,y| y}.reverse!
+save_pop(population)
 
 

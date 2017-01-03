@@ -17,8 +17,8 @@ class Cross
       cross2 = population[i][0].to_s[0..point] + population[i+1][0].to_s[point+1..gene_length-1]
       population[i][0].individual   = s_to_a(cross1)
       population[i+1][0].individual = s_to_a(cross2)      
-      puts "Gravado:\n"+ population[i][0].to_s
-      puts population[i+1][0].to_s
+      puts "Gravado:\n"+  population[i][0].to_s
+      puts                population[i+1][0].to_s
     end
     population
   end
