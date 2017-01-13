@@ -14,6 +14,5 @@ class Binary
     out = ''
     @individual.each {|n| out+=n.to_s}
     out
-  end    
+  end
 end # Binary Class end
-

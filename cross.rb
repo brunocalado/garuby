@@ -1,8 +1,8 @@
 class Cross
-  class << self
-    attr_accessor :population               # Hash with all configuration parameters
-    attr_accessor :n               # Hash with all configuration parameters
-  end  
+  #class << self
+    #attr_accessor :population               # Hash with all configuration parameters
+    #attr_accessor :n               # Hash with all configuration parameters
+  #end  
 
   def self.cross(population, params)  
     cross_points    = params[:cross_points].to_i
